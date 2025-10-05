@@ -81,7 +81,7 @@ public class CreateOrderHandlerTests
     }
 
     [Fact]
-    public async Task Handle_WithInsufficientStock_ShouldThrowInsufficientStockException()
+    public async Task Handle_WithInsufficientStock_ShouldThrowDomainExceptionWithInnerInsufficientStock()
     {
         // Arrange
         var product = Product.Create("Laptop", "High-end laptop", 1500, 5);
@@ -96,19 +96,23 @@ public class CreateOrderHandlerTests
             .Throws(new InsufficientStockException("Insufficient stock for product."));
 
         // Act
-        InsufficientStockException? caughtException = null;
+        DomainException? caughtException = null;
+
         try
         {
             await _handler.Handle(command, CancellationToken.None);
         }
-        catch (InsufficientStockException ex)
+        catch (DomainException ex)
         {
             caughtException = ex;
         }
 
         // Assert
         caughtException.Should().NotBeNull();
-        caughtException!.Message.Should().Contain("Insufficient stock");
+        caughtException!.Message.Should().Contain("Unexpected error while creating order");
+        caughtException.InnerException.Should().BeOfType<InsufficientStockException>();
+        caughtException.InnerException!.Message.Should().Contain("Insufficient stock");
     }
+    
 }
 

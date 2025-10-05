@@ -1,0 +1,93 @@
+## Compilación y binarios
+bin/
+obj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]og/
+[Ll]ogs/
+
+## Archivos temporales y generados
+*.user
+*.rsuser
+*.suo
+*.cache
+*.pdb
+*.mdb
+*.opendb
+*.obj
+*.exe
+*.dll
+*.log
+*.vspscc
+*.vssscc
+*.vshost.*
+*.dbmdl
+
+## Archivos de configuración locales
+*.userprefs
+*.csproj.user
+*.sln.docstates
+*.vsconfig
+
+## Herramientas de Visual Studio
+.vs/
+.idea/
+.vscode/
+
+## Archivos de paquetes y dependencias
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+project.lock.json
+project.fragment.lock.json
+
+## Publicaciones
+publish/
+out/
+artifacts/
+
+## Datos de pruebas y cobertura
+TestResults/
+*.coverage
+*.coveragexml
+*.testsettings
+*.vsmdi
+*.psess
+*.vsp
+*.vspx
+
+## Herramientas de CI/CD
+*.azure-pipelines.yml
+*.yml.lock
+
+## Archivos generados por herramientas
+Generated_Code/
+ServiceFabricBackup/
+*.xsd.cs
+*.Designer.cs
+*.AssemblyInfo.cs
+*.g.cs
+*.g.i.cs
+
+## Secretos y claves (¡asegúrate de no subirlos!)
+*.pfx
+*.snk
+secrets.json
+appsettings.Development.json
+
+## Docker y contenedores
+docker-compose.override.yml
+
+## Sistema operativo
+[Tt]humbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+## Archivos de entorno
+.env
+.env.local
+
+## Otros
+*.swp
+*.tmp

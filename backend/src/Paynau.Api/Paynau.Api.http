@@ -1,0 +1,6 @@
+@Paynau.Api_HostAddress = http://localhost:5120
+
+GET {{Paynau.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

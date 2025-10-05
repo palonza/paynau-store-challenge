@@ -85,5 +85,15 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
+if (args.Contains("--migrate"))
+{
+    Console.WriteLine("🧩 Running migrations on startup...");
+    using var scope = app.Services.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<PaynauDbContext>();
+    db.Database.Migrate();
+    Console.WriteLine("✅ Migrations applied successfully.");
+    return;
+}
+
 app.Run();
 

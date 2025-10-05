@@ -1,3 +1,4 @@
+# ---- Build stage ----
 FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 WORKDIR /src
 
@@ -18,11 +19,22 @@ COPY . .
 WORKDIR "/src/src/Paynau.Api"
 RUN dotnet build "Paynau.Api.csproj" -c Release -o /app/build
 
-# Publish the application
+# ---- Publish stage ----
 FROM build AS publish
 RUN dotnet publish "Paynau.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-# Final stage - runtime
+
+# ---- Migration stage ----
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS migrator
+WORKDIR /src
+COPY . .
+WORKDIR "/src/src/Paynau.Api"
+RUN dotnet build "Paynau.Api.csproj" -c Release -o /app/build
+
+
+
+
+# ---- Runtime stage ----
 FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine AS final
 WORKDIR /app
 
@@ -33,8 +45,12 @@ COPY --from=publish /app/publish .
 COPY ["src/Paynau.Infrastructure/Seed/products.json", "Seed/"]
 COPY ["src/Paynau.Infrastructure/Seed/orders.json", "Seed/"]
 
-EXPOSE 5001
+# Copy custom entrypoint script
+COPY migrate-and-run.sh /app/
 
+RUN chmod +x /app/migrate-and-run.sh
+
+EXPOSE 5001
 ENV ASPNETCORE_URLS=http://+:5001
 
-ENTRYPOINT ["dotnet", "Paynau.Api.dll"]
+ENTRYPOINT ["sh", "/app/migrate-and-run.sh"]

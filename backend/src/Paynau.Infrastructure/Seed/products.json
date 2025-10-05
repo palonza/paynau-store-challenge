@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Smartwatch X100",
+    "description": "Reloj inteligente con GPS",
+    "price": 199.99,
+    "stock": 50
+  },
+  {
+    "id": 2,
+    "name": "Laptop Pro 15",
+    "description": "Laptop de 15 pulgadas",
+    "price": 1499.00,
+    "stock": 5
+  },
+  {
+    "id": 3,
+    "name": "Headphones Basic",
+    "description": "Auriculares con micrófono",
+    "price": 29.99,
+    "stock": 0
+  },
+  {
+    "id": 4,
+    "name": "Coffee Maker 3000",
+    "description": "Cafetera automática con temporizador",
+    "price": 79.50,
+    "stock": 1000
+  },
+  {
+    "id": 5,
+    "name": "USB Cable",
+    "description": "Cable USB-C de 1 metro",
+    "price": 9.99,
+    "stock": 1
+  },
+  {
+    "id": 6,
+    "name": "Monitor UltraWide 34",
+    "description": "Monitor curvo de 34 pulgadas",
+    "price": 899.90,
+    "stock": 0
+  }
+]

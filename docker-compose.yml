@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: paynau-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-MySqlP@ssw0rd}
+      MYSQL_DATABASE: PaynauDb
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - paynau-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$${MYSQL_ROOT_PASSWORD:-MySqlP@ssw0rd}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 40s
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: paynau-backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__Default=Server=mysql;Port=3306;Database=PaynauDb;User=root;Password=${MYSQL_ROOT_PASSWORD:-MySqlP@ssw0rd};
+      - JWT__Issuer=${JWT_ISSUER:-paynau-dev}
+      - JWT__Audience=${JWT_AUDIENCE:-paynau-api}
+      - JWT__Key=${JWT_KEY:-supersecretdevkey12345678901234567890}
+      - LOGTAIL__ENABLED=${LOGTAIL_ENABLED:-false}
+      - LOGTAIL__SOURCE_TOKEN=${LOGTAIL_SOURCE_TOKEN:-}
+      - LOGTAIL__ENDPOINT=${LOGTAIL_ENDPOINT:-https://in.logtail.com}
+    ports:
+      - "5001:5001"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - paynau-network
+    restart: "no"
+
+volumes:
+  mysql_data:
+
+networks:
+  paynau-network:
+    driver: bridge

@@ -1,22 +1,22 @@
 [
   {
-    "id": 1,
-    "productId": 1,
-    "quantity": 2
+    "Id": 1,
+    "ProductId": 1,
+    "Quantity": 2
   },
   {
-    "id": 2,
-    "productId": 2,
-    "quantity": 1
+    "Id": 2,
+    "ProductId": 2,
+    "Quantity": 1
   },
   {
-    "id": 3,
-    "productId": 4,
-    "quantity": 5
+    "Id": 3,
+    "ProductId": 4,
+    "Quantity": 5
   },
   {
-    "id": 4,
-    "productId": 5,
-    "quantity": 1
+    "Id": 4,
+    "ProductId": 5,
+    "Quantity": 1
   }
 ]

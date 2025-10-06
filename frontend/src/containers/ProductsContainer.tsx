@@ -4,11 +4,14 @@ import { Box, Button, Dialog, DialogTitle, DialogContent, Typography } from '@mu
 import { Add as AddIcon } from '@mui/icons-material';
 import { ProductsTable } from '../components/products/ProductsTable';
 import { ProductForm } from '../components/products/ProductForm';
-import { productsApi, ProductDto, ApiError } from '../api/client';
+import { productsApi, ApiError } from '../api/client';
+import type { ProductDto } from '../api/client';
 import type { ProductFormData } from '../types/extended';
 import { useToast } from '../hooks/useToast';
 
 export const ProductsContainer: React.FC = () => {
+  console.log("🟢 ProductsContainer montado"); // 👈 log inmediato
+  
   const [products, setProducts] = useState<ProductDto[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -30,6 +33,8 @@ export const ProductsContainer: React.FC = () => {
 
   // Cargar productos
   const fetchProducts = useCallback(async () => {
+    console.log("API base URL:", import.meta.env.VITE_API_BASE_URL);
+
     try {
       setLoading(true);
       setError(null);

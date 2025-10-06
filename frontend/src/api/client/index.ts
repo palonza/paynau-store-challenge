@@ -120,7 +120,7 @@ async function request<T>(
 
 export const productsApi = {
   async getAll(): Promise<ProductDto[]> {
-    return request<ProductDto[]>('/api/Products', {
+    return request<ProductDto[]>('/api/products', {
       method: 'GET',
     });
   },

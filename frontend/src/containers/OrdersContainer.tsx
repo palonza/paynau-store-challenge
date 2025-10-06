@@ -5,7 +5,7 @@ import { OrdersTable } from '../components/orders/OrdersTable';
 import { OrderForm } from '../components/orders/OrderForm';
 import { useToast } from '../hooks/useToast';
 import { ordersApi, productsApi, ApiError } from '../api/client';
-import type { OrderDto, ProductDto } from '../api/client';
+import type { ProductDto } from '../api/client';
 import type { OrderViewDto } from '../types/extended';
 
 export const OrdersContainer: React.FC = () => {

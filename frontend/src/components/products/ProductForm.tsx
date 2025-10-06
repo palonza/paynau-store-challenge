@@ -9,8 +9,8 @@ import {
   Box,
   Alert,
 } from '@mui/material';
-import { ProductDto } from '../../api/client';
-import { ProductFormData } from '../../types/extended';
+import type { ProductDto } from '../../api/client';
+import type { ProductFormData } from '../../types/extended';
 
 interface ProductFormProps {
   open: boolean;

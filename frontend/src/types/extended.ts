@@ -1,15 +1,31 @@
-import { OrderDto, ProductDto } from '../api/client';
+// src/types/extended.ts
 
-export type OrderStatus = 'pending' | 'completed' | 'cancelled';
-
-export interface OrderViewDto extends OrderDto {
-  status: OrderStatus;
-  productName?: string; // Opcional, por si el container resuelve el nombre del producto
+// --- Tipos de dominio base ---
+export interface ProductDto {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
 }
 
+// --- Formularios ---
 export interface ProductFormData {
   name: string;
   description: string;
   price: number;
   stock: number;
+}
+
+// --- Órdenes ---
+export type OrderStatus = 'pending' | 'completed' | 'cancelled';
+
+export interface OrderViewDto {
+  id: number;
+  productId: number;
+  productName?: string;
+  quantity: number;
+  total: number;
+  createdAt: string;
+  status: OrderStatus;
 }

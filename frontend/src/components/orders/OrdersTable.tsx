@@ -20,7 +20,7 @@ import {
   Visibility as VisibilityIcon,
   Cancel as CancelIcon,
 } from '@mui/icons-material';
-import { OrderViewDto, OrderStatus } from '../../types/extended';
+import type { OrderViewDto, OrderStatus } from '../../types/extended';
 
 interface OrdersTableProps {
   orders: OrderViewDto[];

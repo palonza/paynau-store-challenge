@@ -1,5 +1,7 @@
-import React from "react";
 import { ProductsTable } from "./components/products/ProductsTable";
+import { ProductForm } from "./components/products/ProductForm";
+import { OrderForm } from "./components/orders/OrderForm";
+import { OrdersTable } from "./components/orders/OrdersTable";
 
 export default function Playground() {
   const sampleProducts = [
@@ -14,7 +16,6 @@ export default function Playground() {
         loading={false}
         error={null}
         page={0}
-        
         rowsPerPage={5}
         totalCount={sampleProducts.length}
         onPageChange={() => {}}
@@ -22,6 +23,36 @@ export default function Playground() {
         onView={(p) => console.log("Ver", p)}
         onEdit={(p) => console.log("Editar", p)}
         onDelete={(id) => console.log("Eliminar", id)}
+      />
+
+      <ProductForm
+        open={true}
+        onClose={() => console.log("Cerrar formulario")}
+        onSubmit={(data) => console.log("Crear producto", data)}
+        loading={false}
+        error={null}
+      />
+
+      <OrderForm
+        open={true}
+        onClose={() => console.log("Cerrar orden")}
+        onSubmit={(o) => console.log("Orden creada", o)}
+        loading={false}
+        error={null}
+        products={sampleProducts}
+      />
+
+      <OrdersTable
+        orders={[]}
+        loading={false}
+        error={null}
+        page={0}
+        rowsPerPage={5}
+        totalCount={0}
+        onPageChange={() => {}}
+        onRowsPerPageChange={() => {}}
+        onView={() => {}}
+        onCancel={() => {}}
       />
     </div>
   );

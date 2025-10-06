@@ -13,9 +13,9 @@ import {
   InputLabel,
   Select,
   FormHelperText,
-  SelectChangeEvent,
 } from '@mui/material';
-// import { ProductDto } from '../../api/client';
+import type { SelectChangeEvent } from '@mui/material';
+import type { ProductDto } from '../../api/client';
 
 interface OrderFormProps {
   open: boolean;

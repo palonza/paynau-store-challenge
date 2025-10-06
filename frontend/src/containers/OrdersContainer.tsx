@@ -30,6 +30,8 @@ export const OrdersContainer: React.FC = () => {
 
   // Cargar órdenes y productos
   const fetchOrders = useCallback(async () => {
+    console.log("[OK]: Cargando órdenes desde:", import.meta.env.VITE_API_BASE_URL);
+
     try {
       setLoading(true);
       setError(null);
@@ -37,6 +39,9 @@ export const OrdersContainer: React.FC = () => {
         ordersApi.getAll(),
         productsApi.getAll(),
       ]);
+
+    console.log("[OK]: Órdenes recibidas:", ordersData);
+    console.log("[OK]: Productos recibidos:", productsData);
 
       // Convertir OrderDto a OrderViewDto con información del producto
       const ordersWithProducts: OrderViewDto[] = ordersData.map((order) => {

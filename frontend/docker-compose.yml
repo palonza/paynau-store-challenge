@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: paynau-frontend
+    ports:
+      - "3001:3001"
+    environment:
+      VITE_API_BASE_URL: http://paynau-backend:5001
+      VITE_APP_ENV: development
+    networks:
+      - paynau-network
+
+networks:
+  paynau-network:
+    driver: bridge

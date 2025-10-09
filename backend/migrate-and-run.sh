@@ -25,6 +25,8 @@ done
 echo "Giving MySQL additional time to initialize..."
 sleep 5
 
+dotnet Paynau.Api.dll --apply-migrations
+
 echo "Starting Paynau API..."
 echo "Migrations and seeding will be applied automatically"
 

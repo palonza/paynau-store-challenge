@@ -42,11 +42,12 @@ services:
         condition: service_healthy
     networks:
       - paynau-network
-    restart: "no"
+    restart: on-failure
 
 volumes:
   mysql_data:
 
 networks:
   paynau-network:
+    name: paynau-network
     driver: bridge

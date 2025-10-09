@@ -49,6 +49,9 @@ builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 // Domain Services
 builder.Services.AddScoped<IOrderDomainService, OrderDomainService>();
 
+builder.Services.AddScoped<Paynau.Infrastructure.Security.IJwtTokenService, Paynau.Infrastructure.Security.JwtTokenService>();
+
+
 // Seeder
 builder.Services.AddScoped<DataSeeder>();
 
@@ -110,16 +113,26 @@ using (var scope = app.Services.CreateScope())
         }
         
         // Aplicar migraciones
+        // if (pendingMigrations.Any())
+        // {
+        //     logger.LogInformation("Applying {Count} pending migrations...", pendingMigrations.Count());
+        //     await db.Database.MigrateAsync();
+        //     logger.LogInformation("Migrations applied successfully");
+        // }
+        // else
+        // {
+        //     logger.LogInformation("Database is already up to date");
+        // }
+        // Solo verificar migraciones pendientes
         if (pendingMigrations.Any())
         {
-            logger.LogInformation("Applying {Count} pending migrations...", pendingMigrations.Count());
-            await db.Database.MigrateAsync();
-            logger.LogInformation("Migrations applied successfully");
+            logger.LogWarning("There are {Count} pending migrations. They should be applied before starting the app.", pendingMigrations.Count());
         }
         else
         {
-            logger.LogInformation("Database is already up to date");
+            logger.LogInformation("Database is up to date.");
         }
+
         
         // Verificar que las tablas existan
         try
@@ -160,6 +173,9 @@ app.UseRouting();
 app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseMiddleware<JwtResponseMiddleware>();
+
 app.MapControllers();
 
 app.Run();

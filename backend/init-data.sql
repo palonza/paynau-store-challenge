@@ -13,8 +13,8 @@ INSERT INTO Products (Id, Name, Description, Price, Stock) VALUES
 (5, 'External SSD', '1TB portable external SSD with high-speed USB 3.2.', 139.99, 60),
 (6, 'Noise Cancelling Headphones', 'Wireless over-ear headphones with active noise cancelling.', 199.99, 30);
 
-INSERT INTO Orders (Id, ProductId, Quantity, Total) VALUES
-(1, 1, 2, 25.99 * 2),
-(2, 2, 1, 89.50 * 1),
-(3, 4, 5, 49.00 * 5),
-(4, 5, 1, 139.99 * 1);
+INSERT INTO Orders (Id, ProductId, Quantity, Total, CreatedAt) VALUES
+(1, 1, 2, 25.99 * 2, NOW()),
+(2, 2, 1, 89.50 * 1, NOW()),
+(3, 4, 5, 49.00 * 5, NOW()),
+(4, 5, 1, 139.99 * 1, NOW());
